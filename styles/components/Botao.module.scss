@@ -1,0 +1,19 @@
+.btnBotao {
+    width: 180px;
+    height: 3rem;
+    border-radius: 10px;
+    background-color: rgb(190, 64, 6);
+    border: 1px solid rgb(250, 164, 107);
+    color: #fff;
+    margin-top: 3rem;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        box-shadow: 0px 0px 10px rgba(250, 246, 245, 0.6);
+        background-color: rgb(38, 51, 80);
+        letter-spacing: 1.5px;
+    }
+}

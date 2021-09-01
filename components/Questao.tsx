@@ -30,7 +30,8 @@ export default function Questao(props: QuestaoProps) {
                     indice={i}
                     letra={letras[i].valor}
                     corFundoLetra={letras[i].cor}
-                    respostaFornecida={props.respostaFornecida} />
+                    respostaFornecida={props.respostaFornecida}
+                />
             )
         })
     }

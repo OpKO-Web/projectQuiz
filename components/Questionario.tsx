@@ -20,16 +20,17 @@ export default function Questionario(props: QuestionarioProps) {
 
     return (
         <div className={styles.questionario}>
-            {props.questao ? (
+            {props.questao ?
                 <Questao
                     valor={props.questao}
                     tempoParaResposta={10}
                     respostaFornecida={respostaFornecida}
                     tempoEsgotado={props.irProximoPasso} />
-            ) : false
+                : false
             }
 
-            <Botao texto={props.ultimaPergunta ? "FINALIZAR" : "PRÓXIMA"} onClick={props.irProximoPasso} />
+            <Botao onClick={props.irProximoPasso}
+                texto={props.ultimaPergunta ? "FINALIZAR" : "PRÓXIMA"} />
         </div>
 
     )

@@ -3,7 +3,6 @@ import QuestaoModel from '../model/questao';
 import Questao from './Questao';
 import Botao from './Botao';
 
-
 interface QuestionarioProps {
     questao: QuestaoModel
     ultimaPergunta: boolean
@@ -21,13 +20,13 @@ export default function Questionario(props: QuestionarioProps) {
 
     return (
         <div className={styles.questionario}>
-            {
-                props.questao ? (
-                    <Questao valor={props.questao}
-                        tempoParaResposta={10}
-                        respostaFornecida={respostaFornecida}
-                        timeIsOver={props.irProximoPasso} />
-                ) : false
+            {props.questao ? (
+                <Questao
+                    valor={props.questao}
+                    tempoParaResposta={10}
+                    respostaFornecida={respostaFornecida}
+                    timeIsOver={props.irProximoPasso} />
+            ) : false
             }
 
             <Botao texto={props.ultimaPergunta ? "FINALIZAR" : "PRÓXIMA"} onClick={props.irProximoPasso} />

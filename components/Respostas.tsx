@@ -41,10 +41,7 @@ export default function Respostas(props: RespostasProps) {
                         </div>
                     )}
                 </div>
-
             )}
-
-
         </div>
     )
 }

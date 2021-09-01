@@ -10,7 +10,7 @@ const questoes: QuestaoModel[] = [
     ]),
     new QuestaoModel(305, 'Qual a capital de Tocantins?', [
         RespostaModel.errada('Teresina'),
-        RespostaModel.errada('Maceio'),
+        RespostaModel.errada('Maceió'),
         RespostaModel.errada('Juazeiro'),
         RespostaModel.certa('Palmas'),
     ]),

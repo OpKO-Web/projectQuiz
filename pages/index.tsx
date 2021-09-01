@@ -45,11 +45,8 @@ export default function Home() {
   }
 
   function idProximaPergunta() {
-    if (questao) {
-      const proximoIndice = IdsDasQuestoes.indexOf(questao.id) + 1
-      return IdsDasQuestoes[proximoIndice]
-    }
-
+    const proximoIndice = IdsDasQuestoes.indexOf(questao.id) + 1
+    return IdsDasQuestoes[proximoIndice]
   }
 
   function irProximoPasso() {
@@ -71,7 +68,7 @@ export default function Home() {
     })
   }
 
-  return (
+  return questao ? (
     <div className={styles.container}>
       <Head>
         <title>NextApp: "QUIZ"</title>
@@ -89,8 +86,7 @@ export default function Home() {
           irProximoPasso={irProximoPasso} />
       </div>
 
-
-
     </div>
-  )
+
+  ) : false
 }

@@ -4,7 +4,7 @@ import styles from '../styles/components/Temporizador.module.scss'
 interface TemporizadorProps {
     key: any
     duration: number
-    timeIsOver: () => void
+    tempoEsgotado: () => void
 }
 
 export default function Temporizador(props: TemporizadorProps) {
@@ -12,7 +12,7 @@ export default function Temporizador(props: TemporizadorProps) {
         <div className={styles.containerTimer}>
             <CountdownCircleTimer
                 duration={props.duration}
-                onComplete={props.timeIsOver}
+                onComplete={props.tempoEsgotado}
                 size={80}
                 isPlaying
                 colors={[

@@ -15,7 +15,7 @@ interface QuestaoProps {
     valor: QuestaoModel
     tempoParaResposta?: number
     respostaFornecida: (indice: number) => void
-    timeIsOver: () => void
+    tempoEsgotado: () => void
 }
 
 export default function Questao(props: QuestaoProps) {
@@ -41,7 +41,7 @@ export default function Questao(props: QuestaoProps) {
             <Temporizador
                 key={questao.id}
                 duration={props.tempoParaResposta ?? 15}
-                timeIsOver={props.timeIsOver} />
+                tempoEsgotado={props.tempoEsgotado} />
             {renderizarRespostas()}
         </div>
     )

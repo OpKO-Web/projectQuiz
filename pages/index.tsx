@@ -17,18 +17,17 @@ export default function Home() {
   const [questao, setQuestao] = useState<QuestaoModel>()
   const [respostarCertas, setRespostasCertas] = useState<number>(0)
 
-
   async function carregarIdsDasQuestoes() {
     const resp = await fetch(`${BASE_URL}/questionario`)
     const idsDasQuestoes = await resp.json()
     setIdsDasQuestoes(idsDasQuestoes)
   }
+
   async function carregarQuestao(idQuestao: number) {
     const resp = await fetch(`${BASE_URL}/questoes/${idQuestao}`)
     const json = await resp.json()
-    const novaQuestao = (QuestaoModel.criarUsandoObjeto(json))
+    const novaQuestao = QuestaoModel.criarUsandoObjeto(json)
     setQuestao(novaQuestao)
-
   }
 
   useEffect(() => {

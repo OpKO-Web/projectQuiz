@@ -65,10 +65,10 @@ export default class QuestaoModel {
     paraObjeto() {
         return {
             id: this.#id,
-            enunciado: this.enunciado,
-            responsdida: this.respondida,
+            enunciado: this.#enunciado,
+            respondida: this.respondida,
             acertou: this.#acertou,
-            respostas: this.respostas.map(resp => resp.paraObjeto()),
+            respostas: this.#respostas.map(resp => resp.paraObjeto()),
 
         }
     }

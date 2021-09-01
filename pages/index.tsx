@@ -1,55 +1,75 @@
 import Head from 'next/head'
 import QuestaoModel from '../model/questao';
 import styles from '../styles/Home.module.scss'
-import RespostaModel from '../model/resposta';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Questionario from '../components/Questionario';
 
-
-
-
-const questaoTeste = new QuestaoModel(1, 'As cores do padrão RGB são?', [
-  RespostaModel.errada('Azul, Verde, Rosa'),
-  RespostaModel.errada('Roxo, Vermelho, Branco'),
-  RespostaModel.errada('Azul, Verde, Branco'),
-  RespostaModel.certa('Vermelha, Verde, Azul'),
-])
 
 const BASE_URL = "http://localhost:3000/api"
 
 
 export default function Home() {
+  const router = useRouter()
 
-  const [questao, setQuestao] = useState(questaoTeste)
-  const [IdsQuestoes, setIdsQuestoes] = useState<number[]>([])
+  const [IdsDasQuestoes, setIdsDasQuestoes] = useState<number[]>([])
+  const [questao, setQuestao] = useState<QuestaoModel>()
+  const [respostarCertas, setRespostasCertas] = useState<number>(0)
 
-  async function carregarIdsQuestoes() {
+
+  async function carregarIdsDasQuestoes() {
     const resp = await fetch(`${BASE_URL}/questionario`)
     const idsDasQuestoes = await resp.json()
-    console.log(idsDasQuestoes)
-    setIdsQuestoes(idsDasQuestoes)
+    setIdsDasQuestoes(idsDasQuestoes)
   }
   async function carregarQuestao(idQuestao: number) {
     const resp = await fetch(`${BASE_URL}/questoes/${idQuestao}`)
     const json = await resp.json()
-    console.log(QuestaoModel.criarUsandoObjeto(json))
+    const novaQuestao = (QuestaoModel.criarUsandoObjeto(json))
+    setQuestao(novaQuestao)
+
   }
 
   useEffect(() => {
-    carregarIdsQuestoes()
+    carregarIdsDasQuestoes()
   }, [])
 
   useEffect(() => {
-    IdsQuestoes.length > 0 && carregarQuestao(IdsQuestoes[0])
-  }, [IdsQuestoes])
+    IdsDasQuestoes.length > 0 && carregarQuestao(IdsDasQuestoes[0])
+  }, [IdsDasQuestoes])
 
-  function questaoRespondida(questao: QuestaoModel) {
+  function questaoRespondida(questaoRespondida: QuestaoModel) {
+    setQuestao(questaoRespondida)
+    const acertou = questaoRespondida.acertou
+    setRespostasCertas(respostarCertas + (acertou ? 1 : 0))
+  }
+
+  function idProximaPergunta() {
+    if (questao) {
+      const proximoIndice = IdsDasQuestoes.indexOf(questao.id) + 1
+      return IdsDasQuestoes[proximoIndice]
+    }
 
   }
 
   function irProximoPasso() {
+    const proximoId = idProximaPergunta()
+    proximoId ? irPraProximaQuestao(proximoId) : finalizar()
+  }
 
+  function irPraProximaQuestao(proximoId: number) {
+    carregarQuestao(proximoId)
+  }
+
+  function finalizar() {
+    router.push({
+      pathname: "/resultado",
+      query: {
+        total: IdsDasQuestoes.length,
+        certas: respostarCertas
+      }
+    })
   }
 
   return (
@@ -65,7 +85,7 @@ export default function Home() {
       <div className={styles.containerQuestoes}>
         <Questionario
           questao={questao}
-          ultimaPergunta={true}
+          ultimaPergunta={idProximaPergunta() === undefined}
           questaoRespondida={questaoRespondida}
           irProximoPasso={irProximoPasso} />
       </div>

@@ -7,7 +7,6 @@ export default class QuestaoModel {
     #respostas: RespostaModel[] //acessar um array de respostas possíveis
     #acertou: boolean
 
-
     constructor(id: number, enunciado: string, respostas: RespostaModel[], acertou = false) {
         this.#id = id
         this.#enunciado = enunciado
@@ -18,29 +17,28 @@ export default class QuestaoModel {
     get id() {
         return this.#id
     }
+
     get enunciado() {
         return this.#enunciado
     }
+
     get respostas() {
         return this.#respostas
     }
+
     get acertou() {
         return this.#acertou
     }
+
     get naoRespondida() {
         return !this.respondida
     }
+
     get respondida() {
         for (let resposta of this.#respostas) {
             if (resposta.revelada) return true  //caso a pergunta tenha sido respondida, mostar a resposta.
         }
         return false   //caso contrário, não revelar.
-    }
-
-    //ESTA FUNÇÃO IRÁ EMBARALHAR AS QUESTÕES DE CADA PERGUNTA.
-    embaralharRespostas(): QuestaoModel {
-        let respostasEmbaralhadas = embaralhar(this.#respostas)
-        return new QuestaoModel(this.#id, this.#enunciado, respostasEmbaralhadas, this.#acertou)
     }
 
     responderCom(indice: number): QuestaoModel {
@@ -53,6 +51,11 @@ export default class QuestaoModel {
         })
         return new QuestaoModel(this.id, this.enunciado, respostas, acertou)
     }
+    //ESTA FUNÇÃO IRÁ EMBARALHAR AS QUESTÕES DE CADA PERGUNTA.
+    embaralharRespostas(): QuestaoModel {
+        let respostasEmbaralhadas = embaralhar(this.#respostas)
+        return new QuestaoModel(this.#id, this.#enunciado, respostasEmbaralhadas, this.#acertou)
+    }
 
     static criarUsandoObjeto(obj: QuestaoModel): QuestaoModel {
         const respostas = obj.respostas.map(resp => RespostaModel.criarUsandoObjeto(resp))
@@ -63,9 +66,10 @@ export default class QuestaoModel {
         return {
             id: this.#id,
             enunciado: this.enunciado,
-            resposta: this.respostas.map(resp => resp.paraObjeto()),
             responsdida: this.respondida,
-            acertou: this.#acertou
+            acertou: this.#acertou,
+            respostas: this.respostas.map(resp => resp.paraObjeto()),
+
         }
     }
 

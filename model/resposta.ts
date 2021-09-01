@@ -12,6 +12,7 @@ export default class RespostaModel {
     static certa(valor: string) {
         return new RespostaModel(valor, true)
     }
+
     static errada(valor: string) {
         return new RespostaModel(valor, false)
     }
@@ -19,15 +20,17 @@ export default class RespostaModel {
     get valor() {
         return this.#valor
     }
+
     get certa() {
         return this.#certa
     }
+
     get revelada() {
         return this.#revelada
     }
 
     revelarRes() {
-        return new RespostaModel(this.#valor, this.certa, true)
+        return new RespostaModel(this.#valor, this.#certa, true)
     }
 
     static criarUsandoObjeto(obj: RespostaModel): RespostaModel {

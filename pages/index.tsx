@@ -15,7 +15,7 @@ export default function Home() {
 
   const [IdsDasQuestoes, setIdsDasQuestoes] = useState<number[]>([])
   const [questao, setQuestao] = useState<QuestaoModel>()
-  const [respostarCertas, setRespostasCertas] = useState<number>(0)
+  const [respostasCertas, setRespostasCertas] = useState<number>(0)
 
   async function carregarIdsDasQuestoes() {
     const resp = await fetch(`${BASE_URL}/questionario`)
@@ -41,7 +41,7 @@ export default function Home() {
   function questaoRespondida(questaoRespondida: QuestaoModel) {
     setQuestao(questaoRespondida)
     const acertou = questaoRespondida.acertou
-    setRespostasCertas(respostarCertas + (acertou ? 1 : 0))
+    setRespostasCertas(respostasCertas + (acertou ? 1 : 0))
   }
 
   function idProximaPergunta() {
@@ -66,7 +66,7 @@ export default function Home() {
       pathname: "/resultado",
       query: {
         total: IdsDasQuestoes.length,
-        certas: respostarCertas
+        certas: respostasCertas
       }
     })
   }

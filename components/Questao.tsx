@@ -23,13 +23,15 @@ export default function Questao(props: QuestaoProps) {
 
     function renderizarRespostas() {
         return questao.respostas.map((resposta, i) => { //Retornará um array de respostas 
-            return <Respostas
-                key={i}
-                valor={resposta}
-                indice={i}
-                letra={letras[i].valor}
-                corFundoLetra={letras[i].cor}
-                respostaFornecida={props.respostaFornecida} />
+            return (
+                <Respostas
+                    key={`${questao.id}-${i}`}
+                    valor={resposta}
+                    indice={i}
+                    letra={letras[i].valor}
+                    corFundoLetra={letras[i].cor}
+                    respostaFornecida={props.respostaFornecida} />
+            )
         })
     }
 

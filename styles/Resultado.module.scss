@@ -1,14 +1,27 @@
 .containerResultado {
-    width: 100vw;
+    width: 60vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0rem auto;
+    h1 {
+        font-size: 2rem;
+        color: rgb(253, 136, 2);
+    }
     span {
-        width: 40%;
+        width: 50%;
         height: 1px;
         display: block;
         background-color: rgb(245, 193, 116);
+    }
+
+    .valoresEstatic {
+        width: 50%;
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
     }
 }

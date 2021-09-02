@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import QuestaoModel from '../model/questao';
 import styles from '../styles/Home.module.scss'
 import { useState } from 'react';

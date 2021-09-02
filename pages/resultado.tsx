@@ -1,5 +1,7 @@
 import { useRouter } from 'next/dist/client/router'
+import Estatistica from '../components/Estatistica'
 import styles from '../styles/Resultado.module.scss'
+import Botao from '../components/Botao';
 
 
 export default function Resultado() {
@@ -13,9 +15,15 @@ export default function Resultado() {
         <div className={styles.containerResultado}>
             <h1>Resultado Final</h1>
             <span></span>
-            <h2>Total: {total}</h2>
-            <h3>Certas: {certas}</h3>
-            <h4>Percentual: {`${percentual}%`}</h4>
+            <div className={styles.valoresEstatic}>
+                <Estatistica texto="Perguntas" valor={total} />
+                <Estatistica texto="Resp.: 'CERTAS'" valor={certas}
+                    corFundo={certas >= 3 ? "#34a0a4" : "#d62828"} />
+                <Estatistica texto="Percentual" valor={`${percentual}%`}
+                    corFundo={percentual >= 50 ? "#4D7133" : "#660b04"} />
+            </div>
+
+            <Botao href="/" texto="REINICIAR" />
         </div>
     )
 }
